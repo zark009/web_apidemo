@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>接口测试</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.6 -->
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrapValidator.min.css">
+    <link rel="stylesheet" href="/static/bootstrap/css/sweetalert.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/static/dist/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="/static/dist/css/ionicons.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="/static/plugins/datatables/dataTables.bootstrap.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/static/dist/css/AdminLTE.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="/static/dist/css/skins/_all-skins.min.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+    <header class="main-header">
+        <!-- Logo -->
+        <a href="#" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini"><b>A</b>T</span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"><b>A</b>TEST</span>
+        </a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">导航</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+
+
+        </nav>
+
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+
+            <ul class="sidebar-menu">
+
+                <li class="header"></li>
+
+                <li class="treeview active">
+                    <a href="#">
+                        <i class="fa fa-table"></i> <span>接口测试</span>
+                        <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li class="active"><a href="{% url 'api_list' %}"><i class="fa fa-circle-o"></i>接口列表</a></li>
+                        <li><a href="{% url 'api_case' %}"><i class="fa fa-circle-o"></i>接口用例管理</a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li class="treeview active">
+                    <a href="#">
+                        <i class="fa fa-table"></i> <span>配置</span>
+                        <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{% url 'app_list' %}"><i class="fa fa-circle-o"></i>APP管理</a></li>
+                        <li><a href="{% url 'page_list' %}"><i class="fa fa-circle-o"></i>页面管理</a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li class="treeview active">
+                    <a href="#">
+                        <i class="fa fa-table"></i> <span>批量执行</span>
+                        <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{% url 'task_list' %}"><i class="fa fa-circle-o"></i>列表</a></li>
+
+                        </li>
+
+                    </ul>
+                </li>
+
+            </ul>
+        </section>
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header)
+        <section class="content-header">
+            <h1>
+                Data Tables
+                <small>advanced tables</small>
+            </h1>
+
+        </section>-->
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#add_apiModal">
+                                增加
+                            </button>
+
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <table id="table_id" class="table table-hover table-bordered table-condensed">
+                                <thead>
+                                <tr>
+                                    <th style="display:none">序号</th>
+                                    <th style="text-align:center;">接口名称</th>
+                                    <th style="text-align:center;">接口URL</th>
+                                    <th style="display:none">接口描述</th>
+                                    <th style="text-align:center;">用例数量</th>
+                                    <th style="text-align:center;">运行结果</th>
+                                    <th style="text-align:center;">运行耗时</th>
+                                    <th style="text-align:center;">执行时间</th>
+                                    <th style="display:none">app</th>
+                                    <th style="display:none">位置</th>
+                                    <th style="text-align:center;">操作</th>
+                                    <th style="display:none">app</th>
+                                    <th style="display:none">page</th>
+
+
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                {% for api in apis %}
+                                <tr id="api_{{ api.id }}">
+                                    <td style="display:none">{{ api.id }}</td>
+                                    <td style="text-align:center;">{{ api.name }}</td>
+                                    <td><a href="{{ api.url }}">{{ api.url }}</a></td>
+                                    <td style="display:none">{{ api.summary }}</td>
+                                    <td style="text-align:center;"><a href="{% url 'api_case' %}">{{ api.case_count}}
+                                    </td>
+                                    {% if api.status %}
+                                    <td style="text-align:center;"><span class="label label-success">通过</span></td>
+                                    {%else %}
+                                    <td style="text-align:center;"><span class="label label-danger">失败</span></td>
+                                    {% endif %}
+                                    <td style="text-align:center;">{{api.elapsed_time}}ms</td>
+                                    <td style="text-align:center;">{{api.execute_time|date:"Y-m-d H:i:s"}}</td>
+                                    <td style="display:none">{{api.app_id}}</td>
+                                    <td style="display:none">{{api.page_id}}</td>
+                                    <td style="display:none">{{api.app.app_name}}</td>
+                                    <td style="display:none">{{api.page.page_name}}</td>
+                                    <td style="text-align:center;">
+
+                                        <a class="glyphicon glyphicon-play cases_run" id="run_cases" api_id="{{api.id}}"
+                                           role="button"></a>
+                                        <a class="glyphicon glyphicon-edit" onclick="show_api(this)" role="button"></a>
+
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
+        <!-- Modal -->
+        <div class="modal fade in" id="add_apiModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" style="width:800px">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">新增接口</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="add_apiForm" class="form-horizontal clearfix" action="{% url 'addapi' %}"
+                              method="post">
+                            {% csrf_token%}
+                            <input class="form-control" id=appid name="appid" value="" type="hidden">
+                            <input class="form-control" id=pageid name="pageid" value="" type="hidden">
+
+                            <div class="form-group">
+                                <label for="" class="col-sm-2 control-label">APP</label>
+                                <div class="col-sm-5">
+                                    <select id="app_sel" name="select" class="form-control" data-style="btn-primary">
+                                        <option selected value="">请选择APP</option>
+                                        {% for app in apps %}
+                                        <option value="{{ app.app_id }}">{{ app.app_name }}</option>
+                                        {% endfor %}
+                                    </select>
+
+                                </div>
+
+                                <div class="col-sm-5">
+
+                                    <select id="page_sel" name="select" class="form-control" data-style="btn-primary">
+                                        <option selected value="">请选择位置</option>
+
+                                    </select>
+
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+
+
+                                <label for="" class="col-sm-2 control-label">接口名称</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" id="apiname" name="apiname"
+                                           placeholder="请输入接口名称，不少于4个字符" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-2 control-label">接口描述</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" id="apidescribe" name="apidescribe"
+                                           placeholder="请输入接口描述，不少于4个字符" type="text">
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="" class="col-sm-2 control-label">接口url</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" id="apiurl" name="apiurl"
+                                           placeholder="请输入接口url，不少于4个字符" type="text">
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                <button type="submit" class="btn btn-primary">保存</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+        <!-- Modal -->
+        <div class="modal fade in" id="edit_apiModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" style="width:800px">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">修改接口</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="edit_apiForm" class="form-horizontal clearfix" method="post">
+                            {%csrf_token %}
+
+
+                            <input class="form-control" id=id2 name="id" value=""
+                                   type="hidden">
+
+                            <input class="form-control" id=appid2 name="appid" value=""
+                                   type="hidden">
+
+                            <input class="form-control" id=pageid2 name="pageid" value=""
+                                   type="hidden">
+
+                            <div class="form-group">
+                                <label for="" class="col-sm-2 control-label">APP</label>
+                                <div class="col-sm-5">
+                                    <select id="app_sel2" name="select" class="form-control" data-style="btn-primary">
+                                        <option selected value="">请选择APP</option>
+                                        {% for app in apps %}
+                                        <option value="{{ app.app_id }}">{{ app.app_name }}</option>
+                                        {% endfor %}
+                                    </select>
+
+                                </div>
+
+                                <div class="col-sm-5">
+
+                                    <select id="page_sel2" name="select" class="form-control" data-style="btn-primary">
+                                        <option selected value="">请选择位置</option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="" class="col-sm-2 control-label">接口名称</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" id="apiname2" name="apiname"
+                                           placeholder="请输入接口名称，不少于4个字符" type="text">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="" class="col-sm-2 control-label">接口描述</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" id="apidescribe2" name="apidescribe"
+                                           placeholder="请输入接口描述，不少于4个字符" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-2 control-label">接口url</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" id="apiurl2" name="apiurl"
+                                           placeholder="请输入接口url，不少于4个字符" type="text">
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                <button type="submit" class="btn btn-primary update" id="edit_api">
+                                    修改
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+
+    </div>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+            <b>Version</b> 1.1.0
+        </div>
+        <strong>Copyright &copy; 2014-2016 <a href="#">ATest</a>.</strong> All rights
+        reserved.
+    </footer>
+
+    <!-- Control Sidebar -->
+
+
+    <!-- /.control-sidebar -->
+    <!-- Add the sidebar's background. This div must be placed
+         immediately after the control sidebar -->
+
+    <!-- ./wrapper -->
+
+    <!-- jQuery 2.2.3 -->
+    <script src="/static/plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <!-- Bootstrap 3.3.6 -->
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/static/bootstrap/js/common.js"></script>
+    <script src="/static/bootstrap/js/bootstrapValidator.min.js"></script>
+    <script src="/static/bootstrap/js/sweetalert.min.js"></script>
+    <script src="/static/bootstrap/js/csrf.js"></script>
+    <!-- DataTables -->
+    <script src="/static/plugins/datatables/jquery.dataTables.min.js"></script>
+
+    <script src="/static/plugins/datatables/dataTables.bootstrap.min.js"></script>
+    <!-- SlimScroll
+    <script src="/static/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    -->
+    <!-- FastClick
+    <script src="/static/plugins/fastclick/fastclick.js"></script>
+    -->
+    <!-- AdminLTE App-->
+    <script src="/static/dist/js/app.min.js"></script>
+
+    <!-- AdminLTE for demo purposes
+    <script src="/static/dist/js/demo.js"></script>
+    -->
+    <!-- page script -->
+
+
+</body>
+</html>
