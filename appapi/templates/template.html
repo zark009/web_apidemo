@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        接口测试报告
+    </title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <script src="/static/plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/static/bootstrap/js/common.js"></script>
+    <link rel="stylesheet" href="/static/dist/css/AdminLTE.css">
+    <script src="/static/plugins/datatables/jquery.dataTables.min.js"></script>
+     <script src="/static/dist/js/app.min.js"></script>
+</head>
+
+<body>
+<div><h1 style="text-align:center;">接口测试报告</h1></div>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-sm-3">
+            <label>任务ID:</label>
+            <label>{{ tasklist.task_id }}</label>
+        </div>
+        <div class="col-sm-3">
+            <label>任务名称:</label>
+            <label>{{tasklist.task_name}}</label>
+        </div>
+        <div class="col-sm-3">
+            <label>执行时间:</label>
+            <label>{{tasklist.execute_time|date:"Y-m-d H:i:s"}}</label>
+        </div>
+        <div class="col-sm-3">
+            <label>创建时间:</label>
+            <label>{{tasklist.create_time|date:"Y-m-d H:i:s"}}</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <label>任务耗时:</label>
+            <label>{{tasklist.elapsed_time}}s</label>
+        </div>
+        <div class="col-sm-3">
+            <label>执行用例数:</label>
+            <label>{{tasklist.case_count}}</label>
+        </div>
+        <div class="col-sm-3">
+            <label>通过用例数:</label>
+            <label>{{tasklist.pass_count}}</label>
+        </div>
+        <div class="col-sm-3">
+            <label>失败用例数:</label>
+            <label>{{tasklist.fail_count}}</label>
+        </div>
+    </div>
+
+</div>
+<section class="content">
+<div class="box">
+    <div class="box-body">
+        <table class="table table-bordered ">
+            <thead>
+            <tr style="font-weight:bold;background-color:LightSkyBlue">
+                <td style="text-align:center;">APP</td>
+                <td style="text-align:center;">PAGE</td>
+                <td style="text-align:center;">接口名称</td>
+                <td style="text-align:center;">用例名称</td>
+                <td style="display:none">接口url</td>
+                <td style="text-align:center;">运行时间</td>
+                <td style="text-align:center;">执行结果</td>
+                <td style="display:none">响应结果</td>
+            </tr>
+            </thead>
+            <tbody>
+            {% for task in tasks %}
+            {% if task.status %}
+            <tr id="{{task.case.id }}" style="background-color:LawnGreen;color:white;" onclick="show_response2(this)" >
+                <td>{{ task.app.app_name }}</td>
+                <td>{{ task.page.page_name }}</td>
+                <td>{{ task.case.api.name }}</td>
+                <td>{{ task.case.name }}</td>
+                <td style="display:none">{{ task.url }}</td>
+                <td>{{ task.elapsed_time}}ms</td>
+                <td style="display:none">{{ task.result}}</td>
+                <td>通过</td>
+
+                {%else %}
+                <tr id="{{task.case.id }}" style="background-color:OrangeRed;color:white;" onclick="show_response2(this)">
+                <td>{{ task.app.app_name }}</td>
+                <td>{{ task.page.page_name }}</td>
+                <td>{{ task.case.api.name }}</td>
+                <td>{{ task.case.name }}</td>
+                <td style="display:none">{{ task.url }}</td>
+                <td>{{ task.elapsed_time}}ms</td>
+                <td style="display:none">{{ task.result}}</td>
+                <td>失败</td>
+                {% endif %}
+
+            </tr>
+            {% endfor %}
+
+            </tbody>
+            <tfoot>
+            </tfoot>
+        </table>
+    </div>
+    </div>
+    </section>
+<div class="modal fade in" id="show_response2Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" style="width:800px">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">响应结果</h4>
+                    </div>
+                    <div id="response" class="modal-body">
+                        <input class="form-control" id=caseid name="caseid" value=""
+                                   type="hidden">
+                        <div class="form-group">
+                        <label for="" class="col-sm-12 control-label">接口名称:</label>
+                            <input or="" class="col-sm-12 control-label" id="apiname" type="text">
+                        </div>
+
+
+
+
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+
+                        </div>
+                    </div>
+
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+    </div
+</body>
+
+</html>
