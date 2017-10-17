@@ -1,8 +1,0 @@
-<application>
-  <component name="GithubSettings">
-    <option name="AUTH_TYPE" value="TOKEN" />
-    <option name="ANONYMOUS_GIST" value="true" />
-    <option name="OPEN_IN_BROWSER_GIST" value="false" />
-    <option name="PRIVATE_GIST" value="false" />
-  </component>
-</application>
